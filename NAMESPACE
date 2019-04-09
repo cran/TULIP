@@ -1,0 +1,12 @@
+useDynLib(TULIP, .registration=TRUE,.fixes = "C_")
+import("tensr","Matrix","MASS","glmnet")
+export("catch","cv.catch","predict.catch","adjten","catch_matrix","predict.dsda","predict.msda","cv.dsda","cv.msda","dsda","msda","dsda.all","SOS","ROAD","adjvec","getnorm","SeSDA","predict.SeSDA","sim.tensor.cov","sim.bi.vector","cv.SeSDA")
+S3method("predict","dsda")
+S3method("predict","catch")
+S3method("predict","SeSDA")
+S3method("predict","msda")
+S3method("predict","msda.original")
+S3method("predict","msda.modified")
+importFrom("methods","new")
+importFrom("stats","cov","predict","sd","coef","var","ecdf","qnorm","rnorm","runif")
+

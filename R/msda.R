@@ -3,10 +3,10 @@ msda <- function(x, z=NULL, y, testx=NULL,testz=NULL,model=NULL, lambda = NULL, 
                      pmax = min(dfmax * 2 + 20,  nvars), pf = rep(1, nvars), eps = 1e-04, maxit = 1e+06, 
                      sml = 1e-06, verbose = FALSE, perturb = NULL){
 
-  pred = NULL
-  nobs=length(y)
-  nvars=dim(x)[2]
-  nclass=length(unique(as.factor(y)))
+  pred <- NULL
+  nobs <- length(y)
+  nvars <- dim(x)[2]
+  nclass <- length(unique(as.factor(y)))
   if (is.null(testx)){
     if (is.null(z)){
       objm <- msda_noadj(x,y,model=model,lambda, standardize, alpha,nlambda, lambda.factor, dfmax, pmax, pf, eps, maxit, sml, verbose, perturb)
@@ -31,8 +31,8 @@ msda <- function(x, z=NULL, y, testx=NULL,testz=NULL,model=NULL, lambda = NULL, 
       pred <- predict.msda(objm,obj$testxres,z,testz,obj$gamma)
     }
   }
-  objm$pred=pred
-  outlist=c(objm)
+  objm$pred <- pred
+  outlist <- c(objm)
   class(outlist) <- class(objm)
   return(outlist)
   

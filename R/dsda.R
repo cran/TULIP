@@ -1,5 +1,5 @@
-dsda<-function(x, z=NULL, y, testx=NULL,testz=NULL, standardize = FALSE, lambda = lambda, alpha = 1, eps = 1e-07){
-  pred=NULL
+dsda <- function(x, z=NULL, y, testx=NULL,testz=NULL, standardize = FALSE, lambda = lambda, alpha = 1, eps = 1e-07){
+  pred <- NULL
   if (is.null(testx)){
     if (is.null(z)){
       objm <- dsda_noadj(x, y, standardize = standardize, lambda = lambda, alpha = alpha, eps = eps)
@@ -24,7 +24,7 @@ dsda<-function(x, z=NULL, y, testx=NULL,testz=NULL, standardize = FALSE, lambda 
       pred <- predict.dsda(objm,obj$testxres,z,testz,obj$gamma)
     }
   }
-  outlist=c(objm,list(pred=pred))
+  outlist <- c(objm,list(pred=pred))
   class(outlist) <- c('dsda')
   return(outlist)
 }

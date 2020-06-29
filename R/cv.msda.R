@@ -1,16 +1,16 @@
 cv.msda <- function(x, y,model=NULL,nfolds=5, lambda=NULL, lambda.opt="min",...) {
-  nvars=dim(x)[2]
-  nclass=length(unique(y))
+  nvars <- dim(x)[2]
+  nclass <- length(unique(y))
   if (is.null(model)){
-    if (nclass==2){
+    if (nclass == 2){
       cv.dsda(x,y,nfolds=5, lambda=NULL, lambda.opt="min",...)
     }else if (nclass>=3){
-      if (nvars<=2000){ 
+      if (nvars <= 2000){ 
         cv.Omsda(x,y,nfolds=5, lambda=NULL, lambda.opt="min",...)
       }else{
         cv.Mmsda(x,y,nfolds=5, lambda=NULL, lambda.opt="min",...)
       }
-    }else if (nclass==1){
+    }else if (nclass == 1){
       stop("y should be binary or multi-class variables.")
     }
   }else{

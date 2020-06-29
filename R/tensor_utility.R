@@ -53,70 +53,70 @@ prept <- function(x, y) {
     	for (k in 1:nclass) {
      	   prior[k] <- mean(y == k)
     	}
-	    ldim=length(dim(x[[1]])) #m dimensional
-    	p=matrix(0,ncol=ldim,nrow=1)
-    	nvars=1
+	    ldim <- length(dim(x[[1]])) #m dimensional
+    	p <- matrix(0,ncol=ldim,nrow=1)
+    	nvars <- 1
     	for (i in 1:ldim){
-    		p[i]=as.integer(dim(x[[1]])[i])
-    		nvars=nvars*p[i]
+    		p[i] <- as.integer(dim(x[[1]])[i])
+    		nvars <- nvars*p[i]
     	}
      	nobs <- length(x)
     	nres <- length(y)
       if (nres != nobs) 
          stop("x and y have different number of observations")
 	
-    	dim=dim(x[[1]])
-    	num=matrix(0,nrow=k,ncol=1)
+    	dim <- dim(x[[1]])
+    	num <- matrix(0,nrow=k,ncol=1)
     	# estimate mean
-    	es_M=array(list(),k)
+    	es_M <- array(list(),k)
     	for (i in 1:k){
-    		es_M[[i]]=array(0,dim=dim)
+    		es_M[[i]] <- array(0,dim=dim)
     	}
-      nk=nclass-1
+      nk <- nclass-1
     	for (i in 1:nobs){
-	    	es_M[[y[i]]]=es_M[[y[i]]]+x[[i]]	
-    		num[[y[i]]]=num[[y[i]]]+1
+	    	es_M[[y[i]]] <- es_M[[y[i]]]+x[[i]]	
+    		num[[y[i]]] <- num[[y[i]]]+1
     	}
     	for (i in 1:k){
-    		es_M[[i]]=es_M[[i]]/num[[i]]
+    		es_M[[i]] <- es_M[[i]]/num[[i]]
     	}
 
 	#estimate sigma
-    	n=nobs
-    	matx=matrix(list(),n,1)
-    	es_sigma=matrix(list(),ldim,1)
-    	sum_sigma=matrix(list(),ldim,1)
-      matmu=matrix(list(),k,1)
-    	tr=1
+    	n <- nobs
+    	matx <- matrix(list(),n,1)
+    	es_sigma <- matrix(list(),ldim,1)
+    	sum_sigma <- matrix(list(),ldim,1)
+      matmu <- matrix(list(),k,1)
+    	tr <- 1
     	for (j in 1:ldim){
 		    for (i in 1:k){
-			    matmu[[i]]=mat(es_M[[i]],j)
+			    matmu[[i]] <- mat(es_M[[i]],j)
 		    }
-		    sum_sigma[[j]]=matrix(0,nrow=dim[j],ncol=dim[j])
+		    sum_sigma[[j]] <- matrix(0,nrow=dim[j],ncol=dim[j])
 		    for (i in 1:n){
-			    matx[[i]]=mat(x[[i]],j)
-			    sum_sigma[[j]]=sum_sigma[[j]]+(matx[[i]]-matmu[[y[i]]])%*%t(matx[[i]]-matmu[[y[i]]])
+			    matx[[i]] <- mat(x[[i]],j)
+			    sum_sigma[[j]] <- sum_sigma[[j]]+(matx[[i]]-matmu[[y[i]]])%*%t(matx[[i]]-matmu[[y[i]]])
 		    }
-		    sum_sigma[[j]]=sum_sigma[[j]]/(n-k)
+		    sum_sigma[[j]] <- sum_sigma[[j]]/(n-k)
 		    if (j<ldim){
-			    es_sigma[[j]]=sum_sigma[[j]]/sum_sigma[[j]][1,1]
-			    tr=tr*sum(diag(es_sigma[[j]]))
+			    es_sigma[[j]] <- sum_sigma[[j]]/sum_sigma[[j]][1,1]
+			    tr <- tr*sum(diag(es_sigma[[j]]))
 		    }else
 	    	{
-		    	es_sigma[[j]]=sum_sigma[[j]]/tr
+		    	es_sigma[[j]] <- sum_sigma[[j]]/tr
 		    }
   	  }
-      delta=matrix(rep(0),nrow=nclass-1,ncol=prod(dim))
+      delta <- matrix(rep(0),nrow=nclass-1,ncol=prod(dim))
     	for (i in 1:(nclass-1)){
-		    delta[i,]=as.matrix(as.vector(es_M[[i+1]])-as.vector(es_M[[1]]))
+		    delta[i,] <- as.matrix(as.vector(es_M[[i+1]])-as.vector(es_M[[1]]))
     	}
       
-      maxd=max(dim)    
-      sigma=matrix(0,nrow=ldim,ncol=(maxd^2))
+      maxd <- max(dim)    
+      sigma <- matrix(0,nrow=ldim,ncol=(maxd^2))
       for (i in 1:ldim){
-        t<-matrix(0,nrow=maxd,ncol=maxd)
-        t[1:dim[i],1:dim[i]]=es_sigma[[i]]
-        sigma[i,]=as.vector(t)
+        t <- matrix(0,nrow=maxd,ncol=maxd)
+        t[1:dim[i],1:dim[i]] <- es_sigma[[i]]
+        sigma[i,] <- as.vector(t)
       }    
 	    outlist <- list(sigma=sigma, delta = delta, mu =es_M, prior = prior)
     	outlist

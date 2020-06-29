@@ -1,4 +1,4 @@
-predict.msda<-function(object,newx, z=NULL, ztest=NULL, gamma=NULL, ...){
+predict.msda <- function(object, newx, z=NULL, ztest=NULL, gamma=NULL, ...){
   switch(class(object),
          "dsda" = predict.dsda(object,newx, z=z, ztest=ztest, gamma=gamma,...),
          "msda.original" = predict.msda.original(object,newx, z=z, ztest=ztest, gamma=gamma, ...),

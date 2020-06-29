@@ -5,17 +5,17 @@ msda_noadj <- function(x, y,model=NULL, lambda =
                  nvars), pf = rep(1, nvars), eps = 1e-04, maxit =
                  1e+06, sml = 1e-06, verbose = FALSE, perturb = NULL) {
 
-	nvars=dim(x)[2]
-	nobs=length(y)
-	nclass=length(unique(y))
+	nvars <- dim(x)[2]
+	nobs <- length(y)
+	nclass <- length(unique(y))
 	if (is.null(model)){
 	  if (nclass==2){
-	    dsda(x,y=y,lambda=lambda, standardize=standardize, alpha=alpha)
-	  }else if (nclass>=3){
-  	  if (nvars<=2000){ 
-	  	  Omsda(x,y=y,lambda=lambda, nlambda=nlambda, lambda.factor=lambda.factor, dfmax=dfmax, pmax=pmax, pf=pf, eps=eps, maxit=maxit, sml=sml, verbose=verbose, perturb=perturb)
+	    dsda(x, y=y, lambda=lambda, standardize=standardize, alpha=alpha)
+	  }else if (nclass >= 3){
+  	  if (nvars <= 2000){ 
+	  	  Omsda(x, y=y, lambda=lambda, nlambda=nlambda, lambda.factor=lambda.factor, dfmax=dfmax, pmax=pmax, pf=pf, eps=eps, maxit=maxit, sml=sml, verbose=verbose, perturb=perturb)
 	    }else{
-	  	  Mmsda(x,y=y,lambda=lambda, nlambda=nlambda, lambda.factor=lambda.factor, dfmax=dfmax, pmax=pmax, pf=pf, eps=eps, maxit=maxit, sml=sml, verbose=verbose, perturb=perturb)
+	  	  Mmsda(x, y=y, lambda=lambda, nlambda=nlambda, lambda.factor=lambda.factor, dfmax=dfmax, pmax=pmax, pf=pf, eps=eps, maxit=maxit, sml=sml, verbose=verbose, perturb=perturb)
 	    }
 	  }else if (nclass==1){
 	    stop("y should be binary or multi-class variables.")

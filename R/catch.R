@@ -3,10 +3,10 @@ catch <- function(x, z=NULL, y, testx=NULL,testz=NULL, nlambda = 100,
                   lambda = NULL, dfmax = nobs, pmax = min(dfmax * 2 + 20, nvars), 
                   pf = rep(1, nvars), eps = 1e-04, maxit = 1e+05, sml = 1e-06, verbose = FALSE, perturb = NULL){
  # dyn.load('tensor.dll')
-  pred = NULL
-  nobs=length(y)
-  nvars=prod(dim(x[[1]]))
-  nclass=length(unique(as.factor(y)))
+  pred <- NULL
+  nobs <- length(y)
+  nvars <- prod(dim(x[[1]]))
+  nclass <- length(unique(as.factor(y)))
   if (is.null(testx)){
     if (is.null(z)){
       objt <- tsda(x,y,nlambda,lambda.factor,lambda,dfmax,pmax,pf,eps,maxit,sml,verbose,perturb)
@@ -31,7 +31,7 @@ catch <- function(x, z=NULL, y, testx=NULL,testz=NULL, nlambda = 100,
       pred <- predict.catch(objt,obj$testxres,z,testz,obj$gamma)
     }
   }
-  outlist=c(objt,list(pred=pred))
+  outlist = c(objt,list(pred=pred))
   class(outlist) <- c("catch")
   return(outlist)
   

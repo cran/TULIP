@@ -35,7 +35,7 @@ formatoutput <- function(fit, maxit, pmax, nvars, vnames, nk) {
     ntheta <- fit$ntheta[seq(nalam)]
     nthetamax <- max(ntheta)
     lam <- fit$alam[seq(nalam)]
-	obj <- fit$obj[seq(nalam)]
+	  obj <- fit$obj[seq(nalam)]
     stepnames <- paste("s", seq(nalam) - 1, sep = "")
     resnames <- paste("delta", seq(nk), sep = "")
     

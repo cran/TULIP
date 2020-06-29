@@ -5,20 +5,20 @@ tsda <- function(x, y, nlambda = 100, lambda.factor = ifelse((nobs - nclass) <=
  	## data setup
 	   	this.call <- match.call()
     	tmp <- prept(x, y)
-    	ldim=length(dim(x[[1]])) #m dimensional
-    	dimen=dim(x[[1]])
-    	maxd=max(dimen)  
+    	ldim <- length(dim(x[[1]])) #m dimensional
+    	dimen <- dim(x[[1]])
+    	maxd <- max(dimen)  
     	sigma <- as.matrix(tmp$sigma)
 
     	
     	sigmalist<-array(list(),ldim)
     	for (i in 1:ldim){
-    	  tmpsigma=matrix(sigma[i,],maxd,maxd)
+    	  tmpsigma <- matrix(sigma[i,],maxd,maxd)
     	  if (!is.null(perturb)){
-    	    diag(tmpsigma)=diag(tmpsigma)+perturb
-    	    sigma[i,]=matrix(tmpsigma,nrow=1)
+    	    diag(tmpsigma) <- diag(tmpsigma)+perturb
+    	    sigma[i,] <- matrix(tmpsigma,nrow=1)
     	  }
-    	  sigmalist[[i]]=tmpsigma[1:dimen[i],1:dimen[i]]
+    	  sigmalist[[i]] <- tmpsigma[1:dimen[i],1:dimen[i]]
     	}
     	
 	    delta <- as.matrix(tmp$delta)
@@ -65,7 +65,7 @@ tsda <- function(x, y, nlambda = 100, lambda.factor = ifelse((nobs - nclass) <=
     	## output
     	outlist <- formatoutputt(fit, maxit, pmax, dfmax, nvars, vnames, nk)
     	outlist <- c(outlist, list(x = x, y = y, npasses = fit$npass, jerr = fit$jerr, 
-      sigma = sigmalist, delta = delta, mu = mu, prior = prior, call = this.call))
+      sigma <- sigmalist, delta = delta, mu = mu, prior = prior, call = this.call))
     	if (is.null(lambda)) 
         outlist$lambda <- lamfix(outlist$lambda)
     	class(outlist) <- c("catchobj")

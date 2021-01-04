@@ -36,14 +36,14 @@ predict.catch <- function(object, newx, z=NULL, ztest=NULL, gamma=NULL,...){
 	  for (i in 1:nn){
 		  vecx.train[1:nvars,i] <- matrix(x.train[[i]], ncol=1)
 		  for (qq in 1:q){
-			  vecx.train[nvars+q,i] = z[i,q]
+			  vecx.train[nvars+qq,i] = z[i,qq]
 		  }
 	  }
 	  vecx.train = t(vecx.train)
 	  for (i in 1:(length(newx))){
 		  vecnewx[1:nvars,i] <- matrix(newx[[i]], ncol=1)
 		  for (qq in 1:q){
-			  vecnewx[nvars+q,i] = ztest[i,q]
+			  vecnewx[nvars+qq,i] = ztest[i,qq]
 		  }
 	  }
 	  vecnewx = t(vecnewx)
